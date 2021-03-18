@@ -15,8 +15,9 @@ export class CarComponent implements OnInit {
   cars: Car[] = [];
   currentCar:Car;
   carImage:CarImage[]=[];
-  basePath=environment.baseUrl;
+  apiUrl="https://localhost:44371"
   carImageDefault="../../defaultImage/default.jpg"
+  dataLoaded = false;
 
   constructor(
     private carService: CarService,
@@ -30,6 +31,8 @@ export class CarComponent implements OnInit {
         this.getCarByBrand(params["brandId"])
       } else if(params["colorId"]){
         this.getCarByColor(params["colorId"])
+      }else if(params["brandId"] && params["colorId"]){
+        this.getCarsBySelect(params["brandId"],params["colorId"])
       }else if(params["carId"]){
         this.getCarByCar(params["carId"])
       }else{
@@ -38,39 +41,43 @@ export class CarComponent implements OnInit {
     })
   }
 
+  getCarsBySelect(brandId:number, colorId:number){
+    this.carService.getCarsBySelect(brandId,colorId).subscribe(response=>{
+      this.cars=response.data
+      this.dataLoaded=true;
+    })
+  }
+
   getAllCarDetails() {
     this.carService.getAllCarDetails().subscribe((response) => {
       this.cars = response.data;
+      this.dataLoaded=true;
     });
   }
 
   getCarByBrand(brandId: number) {
     this.carService.getCarByBrand(brandId).subscribe((response) => {
       this.cars = response.data;
+      this.dataLoaded=true;
     });
   }
 
   getCarByColor(colorId: number) {
     this.carService.getCarByColor(colorId).subscribe((response) => {
       this.cars = response.data;
+      this.dataLoaded=true;
     });
   }
 
   getCarByCar(carId: number) {
     this.carService.getCarByCar(carId).subscribe((response) => {
       this.cars = response.data;
+      this.dataLoaded=true;
     });
   }
 
   setCurrentCar(car: Car) {
     this.currentCar = car;
+    this.dataLoaded=true;
   }
-
-  // getImageByCarId() {
-    
-  //   this.carImageService.getImageByCarId(11).subscribe((response) => {
-  //     return response.data;
-  //     console.log(response.data);
-  //   });
-  // }
 }

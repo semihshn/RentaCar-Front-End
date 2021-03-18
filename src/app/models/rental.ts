@@ -6,4 +6,5 @@ export interface Rental{
     customerName:string;
     rentDate:Date;
     returnDate:Date;
+    totalPrice:number;
 }
