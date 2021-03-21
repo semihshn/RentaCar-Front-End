@@ -1,23 +1,36 @@
+<div *ngFor="let car of cars" class="card">
+  <div class="card-header">
+    <img  src="{{imageBasePath}}{{car.imagePath}}">
+  </div>
+  <div class="card-body">
+    <b>{{car.carName}}</b>
+    {{car.carId}}
+  </div>
+  <div class="card-footer">
 
-  
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Araç Adı</th>
-        <th>Kullanıcı Adı</th>
-        <th>Şirket Adı</th>
-        <th>Kiralanma Tarihi</th>
-        <th>Teslim Tarihi</th>
-      </tr>
-    </thead>
-    <tr *ngFor="let rental of rentals">
-      <td>{{ rental.id }}</td>
-      <td>{{ rental.carName }}</td>
-      <td>{{ rental.userName }}</td>
-      <td>{{ rental.customerName }}</td>
-      <td>{{ rental.rentDate }}</td>
-      <td>{{ rental.returnDate }}</td>
-    </tr>
-  </table>
+    <select (change)="customerSelectChangeHandler($event)" class="form-select">
+      <option selected>Kullanıcı</option>
+      <option *ngFor="let customer of customers" value="{{customer.id}}">{{ customer.companyName }}</option>
+    </select>
+
+    <div class="mb-3">
+      <label for="rentalStartDateTime" class="form-label">Kiralama Başlangıç Tarihi</label>
+      <input type="datetime-local" class="form-control" id="rentalStartDateTime" [(ngModel)]="rentDate">
+    </div>
+    
+    <div class="mb-3">
+      <label for="rentalEndDateTime" class="form-label">Kira Bitiş Tarihi</label>
+      <input type="datetime-local" class="form-control" id="rentalEndDateTime" [(ngModel)]="returnDate">
+    </div>
+    Dönüş Tarihi : {{returnDate}} Kiralama Tarihi : {{rentDate}}
+    
+    <div class="col d-grid gap-2 mt-4">
+      <button (click)="rentACar(car)" class="btn btn-primary" type="button">Kirala</button>
+    </div>
+  </div>
+</div>
+
+
+   
+
   

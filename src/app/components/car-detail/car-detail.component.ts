@@ -11,8 +11,8 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car-detail.component.css'],
 })
 export class CarDetailComponent implements OnInit {
-  cars: Car[] = [];
-  carImages: CarImage[] = [];
+  cars: Car[];
+  carImages: CarImage[];
   currentImage: CarImage;
   dataLoaded = false;
   imageBasePath = 'https://localhost:44371';
@@ -27,10 +27,8 @@ export class CarDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if(params["carId"]){
         this.getCarDetail(params["carId"]);
-        
       }
       this.getImagesByCarId();
-     
     });
   }
 
@@ -38,13 +36,14 @@ export class CarDetailComponent implements OnInit {
     this.carService.getCarByCar(carId).subscribe((response) => {
       this.cars = response.data;
       this.dataLoaded = true;
+      console.log(this.cars)
     });
   }
 
   getImagesByCarId(){
-    
     this.imageService.getImageByCarId(this.activatedRoute.snapshot.params["carId"]).subscribe((response)=>{
       this.carImages=response.data;      
+      console.log(this.carImages)
     });
   }
 

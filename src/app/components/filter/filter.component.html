@@ -1,0 +1,33 @@
+
+  <div class="row">
+<div class="col">
+  <select (change)="colorSelectChangeHandler($event)" class="form-select">
+    <option selected>Renk</option>
+    <option *ngFor="let color of colors | filtercolor:filterColorText" value="{{color.id}}">{{ color.name }}</option>
+  </select>
+  <input type="text" class="form-control" placeholder="renk arayın..." [(ngModel)]="filterColorText">
+</div>
+</div>
+
+<div class="row mt-5">
+  <div class="col">
+    <select (change)="brandSelectChangeHandler($event)" class="form-select">
+      <option selected>Marka</option>
+      <option *ngFor="let brand of brands | filterbrand:filterBrandText" value="{{brand.id}}">{{ brand.name }}</option>
+    </select>
+    <input type="text" class="form-control" placeholder="marka arayın.." [(ngModel)]="filterBrandText">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col d-grid gap-2 mt-4">
+    <button [routerLink]="filterCar()" (click)="filterCar()" class="btn btn-primary" type="button">Filtrele</button>
+  </div>
+</div>
+
+
+
+
+
+  
+    

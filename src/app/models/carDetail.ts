@@ -3,5 +3,5 @@ import { CarImage } from "./carImage";
 
 export interface CarDetail{
     car:Car;
-    carImage:CarImage[];
+    carImage:Array<CarImage>;
 }

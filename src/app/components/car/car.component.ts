@@ -18,24 +18,26 @@ export class CarComponent implements OnInit {
   apiUrl="https://localhost:44371"
   carImageDefault="../../defaultImage/default.jpg"
   dataLoaded = false;
+  filterText="";
 
   constructor(
     private carService: CarService,
     private carImageService:CarImageService,
     private activatedRout: ActivatedRoute
   ) {}
-
+  
   ngOnInit(): void {
     this.activatedRout.params.subscribe((params)=>{
-      if (params["brandId"]) {
-        this.getCarByBrand(params["brandId"])
-      } else if(params["colorId"]){
-        this.getCarByColor(params["colorId"])
-      }else if(params["brandId"] && params["colorId"]){
-        this.getCarsBySelect(params["brandId"],params["colorId"])
-      }else if(params["carId"]){
-        this.getCarByCar(params["carId"])
-      }else{
+      if(params["colorId"]){
+        this.getCarByColor(params["colorId"]);
+      }
+      else if(params["brandId"]){
+        this.getCarByBrand(params["brandId"]);
+      }
+      else if(params["colorId"] && params["brandId"]){
+        this.getCarsBySelect(params["brandId"],params["colorId"]);
+      }
+      else {
         this.getAllCarDetails();
       }
     })
@@ -78,6 +80,7 @@ export class CarComponent implements OnInit {
 
   setCurrentCar(car: Car) {
     this.currentCar = car;
+    
     this.dataLoaded=true;
   }
 }
