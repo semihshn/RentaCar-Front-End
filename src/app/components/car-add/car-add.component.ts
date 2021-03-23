@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ErrorHelper } from 'src/app/helpers/errorHelper';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-car-add',
@@ -20,7 +21,8 @@ export class CarAddComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private carService: CarService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +45,7 @@ export class CarAddComponent implements OnInit {
       let carModel = Object.assign({}, this.carAddForm.value);
       this.carService.add(carModel).subscribe((response)=>{
         this.toastrService.success("Araç eklendi")
+        this.router.navigate(["admin/car-info"])
       },(responseError)=>{
         let errorMessage = ErrorHelper.getMessage(responseError);
         this.toastrService.error(errorMessage, 'HATA');

@@ -1,3 +1,7 @@
+<div>
+    <button type="button" (click)="goToAddForm()" class="btn btn-primary">Araba Ekle</button>
+</div>
+
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -8,6 +12,7 @@
           <th scope="col">Model Yılı</th>
           <th scope="col">Günlük Ücret</th>
           <th scope="col">Açıklama</th>
+          <th scope="col"></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -20,7 +25,8 @@
           <td>{{car.modelYear}}</td>
           <td>{{car.dailyPrice}}</td>
           <td>{{car.description}}</td>
-          <td><button routerLink="admin/car-update/{{car.id}}" type="button" class="btn btn-success">Güncelle</button></td>
+          <td><button (click)="goToUpdateForm(car)" type="button" class="btn btn-success">Güncelle</button></td>
+          <td><button (click)="delete(car)" type="button" class="btn btn-danger">Sil</button></td>
         </tr>
       </tbody>
   </table>

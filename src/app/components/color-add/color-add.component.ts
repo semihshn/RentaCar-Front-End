@@ -5,6 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorHelper } from 'src/app/helpers/errorHelper';
 import { ColorService } from 'src/app/services/color.service';
@@ -21,7 +22,8 @@ export class ColorAddComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private colorService: ColorService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class ColorAddComponent implements OnInit {
       let carModel = Object.assign({}, this.colorAddForm.value);
       this.colorService.add(carModel).subscribe((response)=>{
         this.toastrService.success("Renk Eklendi")
+        this.router.navigate(["admin/color-info"])
       },(responseError)=>{
         let errorMessage = ErrorHelper.getMessage(responseError);
         this.toastrService.error(errorMessage, 'HATA');

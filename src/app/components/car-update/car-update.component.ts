@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/models/car';
 import { CarService } from 'src/app/services/car.service';
 import {
@@ -17,13 +17,7 @@ import { ErrorHelper } from 'src/app/helpers/errorHelper';
   styleUrls: ['./car-update.component.css'],
 })
 export class CarUpdateComponent implements OnInit {
-  id:number;
-  brandId:number;
-  modelId:number;
-  colorId:number;
-  modelYear:string;
-  dailyPrice:number;
-  description:string;
+  car: Car;
 
   carUpdateForm: FormGroup;
 
@@ -31,7 +25,8 @@ export class CarUpdateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private carService: CarService,
     private formBuilder: FormBuilder,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -45,6 +40,7 @@ export class CarUpdateComponent implements OnInit {
 
   createCarUpdateForm() {
     this.carUpdateForm = this.formBuilder.group({
+      id: ['', Validators.required],
       brandId: ['', Validators.required],
       modelId: ['', Validators.required],
       colorId: ['', Validators.required],
@@ -56,13 +52,8 @@ export class CarUpdateComponent implements OnInit {
 
   getById(carId: number) {
     this.carService.getById(carId).subscribe((response) => {
-      this.id = response.data.id;
-      this.brandId=response.data.brandId;
-      this.modelId=response.data.modelId;
-      this.colorId=response.data.colorId;
-      this.modelYear=response.data.modelYear;
-      this.dailyPrice=response.data.dailyPrice;
-      this.description=response.data.description;
+      this.car = response.data;
+      console.log(this.car)
     });
   }
 
@@ -71,6 +62,7 @@ export class CarUpdateComponent implements OnInit {
       let carModel = Object.assign({}, this.carUpdateForm.value);
       this.carService.update(carModel).subscribe((response)=>{
         this.toastrService.success("Araç güncellendi")
+        this.router.navigate(["admin/car-info"])
       },(responseError)=>{
         let errorMessage = ErrorHelper.getMessage(responseError);
         this.toastrService.error(errorMessage, 'HATA');

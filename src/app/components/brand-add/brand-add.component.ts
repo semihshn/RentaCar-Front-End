@@ -5,6 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ErrorHelper } from 'src/app/helpers/errorHelper';
 import { BrandService } from 'src/app/services/brand.service';
@@ -21,7 +22,8 @@ export class BrandAddComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private brandService: BrandService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +41,7 @@ export class BrandAddComponent implements OnInit {
       let brandModel = Object.assign({}, this.brandAddForm.value);
       this.brandService.add(brandModel).subscribe((response)=>{
         this.toastrService.success("Marka Eklendi")
+        this.router.navigate(["admin/brand-info"])
       },(responseError)=>{
         let errorMessage = ErrorHelper.getMessage(responseError);
         this.toastrService.error(errorMessage, 'HATA');

@@ -17,7 +17,7 @@ export class CarService {
   constructor(private httpClient:HttpClient) { }
 
   getById(carId:number):Observable<SingleResponseModel<Car>>{
-    let newPath=this.apiUrl+"Cars/getbyid?id="+carId;
+    let newPath=this.apiUrl+"cars/getbyid?id="+carId;
     return this.httpClient.get<SingleResponseModel<Car>>(newPath);
   }
 
@@ -57,5 +57,9 @@ export class CarService {
 
   update(car:Car):Observable<ResponseModel>{
     return this.httpClient.post<ResponseModel>(this.apiUrl+"cars/update",car)
+  }
+
+  delete(car:Car):Observable<ResponseModel>{
+    return this.httpClient.post<ResponseModel>(this.apiUrl+"cars/delete",car)
   }
 }

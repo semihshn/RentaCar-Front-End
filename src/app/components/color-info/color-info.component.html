@@ -1,0 +1,22 @@
+<div>
+    <button type="button" (click)="goToAddForm()" class="btn btn-primary">Renk Ekle</button>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let color of colors">
+          <th scope="row">{{color.id}}</th>
+          <td>{{color.name}}</td>
+          <td><button (click)="goToUpdateForm(color)" type="button" class="btn btn-success">Güncelle</button></td>
+          <td><button (click)="delete(color)" type="button" class="btn btn-danger">Sil</button></td>
+        </tr>
+      </tbody>
+  </table>
