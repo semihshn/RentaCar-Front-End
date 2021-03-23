@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Car } from 'src/app/models/car';
+import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
@@ -11,7 +12,7 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car-detail.component.css'],
 })
 export class CarDetailComponent implements OnInit {
-  cars: Car[];
+  carDetails: CarDetail[];
   carImages: CarImage[];
   currentImage: CarImage;
   dataLoaded = false;
@@ -34,9 +35,8 @@ export class CarDetailComponent implements OnInit {
 
   getCarDetail(carId:number) {
     this.carService.getCarByCar(carId).subscribe((response) => {
-      this.cars = response.data;
+      this.carDetails = response.data;
       this.dataLoaded = true;
-      console.log(this.cars)
     });
   }
 

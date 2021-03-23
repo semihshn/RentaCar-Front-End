@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { ErrorHelper } from 'src/app/helpers/errorHelper';
 import { Car } from 'src/app/models/car';
+import { CarDetail } from 'src/app/models/carDetail';
 import { Customer } from 'src/app/models/customer';
+import { ListResponseModel } from 'src/app/models/listResponseModel';
 import { Rental } from 'src/app/models/rental';
 import { RentalDetail } from 'src/app/models/rentalDetail';
 import { CarService } from 'src/app/services/car.service';
@@ -15,10 +19,9 @@ import { RentalService } from 'src/app/services/rental.service';
   styleUrls: ['./rental.component.css'],
 })
 export class RentalComponent implements OnInit {
-  rentals: RentalDetail[] = [];
   customers:Customer[]=[];
-  cars: Car[] = [];
-  rental!: RentalDetail;
+  carDetails:CarDetail[];
+  // rental!: RentalDetail[];
   
   customerId:number;
   returnDate!: Date;
@@ -46,12 +49,11 @@ export class RentalComponent implements OnInit {
 
   getCarDetail(carId: number) {
     this.carService.getCarByCar(carId).subscribe((response) => {
-      this.cars = response.data;
-      console.log(this.cars);
+      this.carDetails = response.data;
     });
   }
 
-  rentACar(car:Car) {
+  rentACar(car:CarDetail) {
     let rentalInstance:Rental={
       rentDate:this.rentDate,
       returnDate:this.returnDate,
@@ -59,16 +61,10 @@ export class RentalComponent implements OnInit {
       customerId:this.customerId
     }
     this.rentalService.add(rentalInstance).subscribe((response)=>{
-      this.toastrService.success("Araç kiralandı elhamdulillah")
+      this.toastrService.success("Araç kiralandı")
     },(responseError)=>{
-      if (responseError.error.Errors.length>0) {
-        console.log(responseError.error.Errors)
-        for (let i = 0; i < responseError.error.Errors.length; i++) {
-          this.toastrService.error(responseError.error.Errors[i].ErrorMessage,"Doğrulama Hatası!");
-          
-        }
-        
-      }
+      let errorMessage = ErrorHelper.getMessage(responseError);
+      this.toastrService.error(errorMessage, 'HATA');
     })
   }
 
@@ -81,4 +77,11 @@ export class RentalComponent implements OnInit {
   customerSelectChangeHandler (event: any) {
     this.customerId = parseInt(event.target.value);
   }
+
+  // goToPay(car:Car){
+  //   this.rentalService.getRentalByCar(car.carId).subscribe((response)=>{
+  //     this.rental=response.data
+  //   })
+  //   return "/pay/car/"+car.carId+"/rent/"+
+  // }
 }

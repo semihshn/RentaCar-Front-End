@@ -1,10 +1,9 @@
-<div *ngFor="let car of cars" class="card">
-  <div class="card-header">
+<div *ngFor="let car of carDetails" class="card">
+  <div style="text-align: center;" class="card-header">
     <img  src="{{imageBasePath}}{{car.imagePath}}">
   </div>
-  <div class="card-body">
+  <div style="text-align: center;" class="card-body">
     <b>{{car.carName}}</b>
-    {{car.carId}}
   </div>
   <div class="card-footer">
 

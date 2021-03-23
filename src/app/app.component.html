@@ -1,16 +1,16 @@
-<div class="container-fluit">
- <app-navi></app-navi>
 
 
 
+
+<div class="container">
     <div class="row">
-        <div class="col-md-3 mt-3">
-            <app-filter></app-filter>
-        </div>
-
-        <div class="col-md-9">
-            <router-outlet></router-outlet>
-        </div>
+        <app-navi></app-navi>
+    </div>
+    <div class="row">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="row">
+        <app-footer></app-footer>
     </div>
 </div>
 
