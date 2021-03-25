@@ -15,7 +15,7 @@ import { environment } from 'src/environments/environment';
 export class CarComponent implements OnInit {
   carDetails:CarDetail[];
   currentCar:Car;
-  carImage:CarImage[]=[];
+  carImages:CarImage[];
   apiUrl="https://localhost:44371"
   carImageDefault="../../defaultImage/default.jpg"
   dataLoaded = false;
@@ -28,6 +28,7 @@ export class CarComponent implements OnInit {
   ) {}
   
   ngOnInit(): void {
+    this.getAllImage();
     this.activatedRout.params.subscribe((params)=>{
       if(params["colorId"]){
         this.getCarByColor(params["colorId"]);
@@ -72,16 +73,24 @@ export class CarComponent implements OnInit {
     });
   }
 
-  getCarByCar(carId: number) {
-    this.carService.getCarByCar(carId).subscribe((response) => {
-      this.carDetails = response.data;
-      this.dataLoaded=true;
-    });
-  }
-
   setCurrentCar(car: Car) {
     this.currentCar = car;
     
     this.dataLoaded=true;
+  }
+
+  getImageByCar(car:CarDetail){
+    for (let i = 0; i < this.carImages.length; i++) {
+      if (car.carId==this.carImages[i].carId) {
+      return this.apiUrl+this.carImages[i].imagePath;
+      }
+    }
+    return "../../defaultImage/default.jpg"
+  }
+
+  getAllImage(){
+    this.carImageService.getAllImage().subscribe((response)=>{
+      this.carImages=response.data
+    })
   }
 }

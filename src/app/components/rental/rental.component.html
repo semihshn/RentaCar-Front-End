@@ -1,9 +1,9 @@
-<div *ngFor="let car of carDetails" class="card">
-  <div style="text-align: center;" class="card-header">
-    <img  src="{{imageBasePath}}{{car.imagePath}}">
+<div class="card">
+  <div class="card-header text-center">
+    <img  src="{{imageBasePath}}{{carImage.imagePath}}">
   </div>
-  <div style="text-align: center;" class="card-body">
-    <b>{{car.carName}}</b>
+  <div class="card-body text-center">
+    <b>{{carDetail.carName}}</b>
   </div>
   <div class="card-footer">
 
@@ -24,7 +24,7 @@
     Dönüş Tarihi : {{returnDate}} Kiralama Tarihi : {{rentDate}}
     
     <div class="col d-grid gap-2 mt-4">
-      <button (click)="rentACar(car)" class="btn btn-primary" type="button">Kirala</button>
+      <button (click)="rentACar()" class="btn btn-primary" type="button">Kirala</button>
     </div>
   </div>
 </div>

@@ -13,8 +13,10 @@ export class ErrorHelper {
         errorMessages += "\n"+error.ErrorMessage;
       }
       return errorMessages;
-    } else {
+    } else if(error.error.message != null) {
       return error.error.message;
+    }else{
+      return error.error
     }
   }
 }

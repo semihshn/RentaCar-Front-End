@@ -4,9 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NaviComponent } from './components/navi/navi.component';
-import { CategoryComponent } from './components/category/category.component';
 import { CustomerComponent } from './components/customer/customer.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CarComponent } from './components/car/car.component';
 import { RentalComponent } from './components/rental/rental.component';
 
@@ -29,12 +28,14 @@ import { ColorInfoComponent } from './components/color-info/color-info.component
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { BrandInfoComponent } from './components/brand-info/brand-info.component';
 import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { PaymentComponent } from './components/payment/payment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NaviComponent,
-    CategoryComponent,
     CustomerComponent,
     CarComponent,
     RentalComponent,
@@ -53,7 +54,9 @@ import { BrandUpdateComponent } from './components/brand-update/brand-update.com
     ColorInfoComponent,
     ColorUpdateComponent,
     BrandInfoComponent,
-    BrandUpdateComponent
+    BrandUpdateComponent,
+    LoginComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,9 @@ import { BrandUpdateComponent } from './components/brand-update/brand-update.com
       positionClass: 'toast-bottom-right',
     })
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}//AuthInterceptor'ın tüm http isteklerinde çalışması için buraya ekleme yaptık , yani aspect yöntemi kullandık , bu yöntemi kullanmasak her post işleminin içine aynı kodu yazmak zorunda kalırdık , yetkilendirme işlemi çalışması için
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

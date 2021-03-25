@@ -5,10 +5,12 @@ import { Observable } from 'rxjs';
 import { ErrorHelper } from 'src/app/helpers/errorHelper';
 import { Car } from 'src/app/models/car';
 import { CarDetail } from 'src/app/models/carDetail';
+import { CarImage } from 'src/app/models/carImage';
 import { Customer } from 'src/app/models/customer';
 import { ListResponseModel } from 'src/app/models/listResponseModel';
 import { Rental } from 'src/app/models/rental';
 import { RentalDetail } from 'src/app/models/rentalDetail';
+import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { RentalService } from 'src/app/services/rental.service';
@@ -20,8 +22,8 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class RentalComponent implements OnInit {
   customers:Customer[]=[];
-  carDetails:CarDetail[];
-  // rental!: RentalDetail[];
+  carDetail:CarDetail;
+  carImage:CarImage;
   
   customerId:number;
   returnDate!: Date;
@@ -35,13 +37,15 @@ export class RentalComponent implements OnInit {
     private carService: CarService,
     private router:Router,
     private customerService:CustomerService,
-    private toastrService:ToastrService
+    private toastrService:ToastrService,
+    private carImageService:CarImageService
   ) {}
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.getCarDetail(params['carId']);
+        this.getImage(params["carId"])
         this.getCustomer();
       }
     });
@@ -49,19 +53,20 @@ export class RentalComponent implements OnInit {
 
   getCarDetail(carId: number) {
     this.carService.getCarByCar(carId).subscribe((response) => {
-      this.carDetails = response.data;
+      this.carDetail = response.data;
     });
   }
 
-  rentACar(car:CarDetail) {
+  rentACar() {
     let rentalInstance:Rental={
       rentDate:this.rentDate,
       returnDate:this.returnDate,
-      carId:car.carId,
+      carId:this.carDetail.carId,
       customerId:this.customerId
     }
     this.rentalService.add(rentalInstance).subscribe((response)=>{
       this.toastrService.success("Araç kiralandı")
+      this.router.navigate(["pay"])
     },(responseError)=>{
       let errorMessage = ErrorHelper.getMessage(responseError);
       this.toastrService.error(errorMessage, 'HATA');
@@ -76,6 +81,13 @@ export class RentalComponent implements OnInit {
 
   customerSelectChangeHandler (event: any) {
     this.customerId = parseInt(event.target.value);
+  }
+
+  getImage(car:CarDetail){
+    this.carImageService.getImageByCarId(car.carId).subscribe((response)=>{
+        let images =response.data[0];
+        this.carImage=images
+    })
   }
 
   // goToPay(car:Car){

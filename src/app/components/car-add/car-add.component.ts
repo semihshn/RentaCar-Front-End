@@ -47,6 +47,7 @@ export class CarAddComponent implements OnInit {
         this.toastrService.success("Araç eklendi")
         this.router.navigate(["admin/car-info"])
       },(responseError)=>{
+        console.log(responseError)
         let errorMessage = ErrorHelper.getMessage(responseError);
         this.toastrService.error(errorMessage, 'HATA');
       })
