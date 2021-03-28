@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4 text-center mt-5">
+      <form [formGroup]="registerForm">
+        <!-- <img
+				  class="mb-4"
+				  src="/docs/5.0/assets/brand/bootstrap-logo.svg"
+				  alt=""
+				  width="72"
+				  height="57"
+				/> -->
+        <h1 class="h3 mb-3 fw-normal">Kayıt ol</h1>
+
+        <div class="form-floating">
+          <input
+            formControlName="email"
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="name@hotmail.com"
+          />
+          <label for="email">E-posta</label>
+        </div>
+        <div class="form-floating">
+          <input
+            formControlName="password"
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Password"
+          />
+          <label for="password">Parola</label>
+        </div>
+
+        <div class="form-floating">
+          <input
+            formControlName="firstName"
+            type="text"
+            class="form-control"
+            id="firstName"
+            placeholder="Ahmet,mehmet.."
+          />
+          <label for="firstName">İsim</label>
+        </div>
+        <div class="form-floating">
+          <input
+            formControlName="lastName"
+            type="text"
+            class="form-control"
+            id="lastName"
+            placeholder="sarıgül,asiltürk.."
+          />
+          <label for="lastName">Soyisim</label>
+        </div>
+        <div class="form-floating">
+          <input
+		  formControlName="age"
+            type="datetime-local"
+            class="form-control"
+            id="age"
+			placeholder="22/08/1999"
+          />
+          <label for="age" class="form-label"
+            >Yaş</label
+          >
+        </div>
+
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me" /> Remember me
+          </label>
+        </div>
+        <button (click)="register()" class="w-100 btn btn-lg btn-primary">
+          Giriş Yap
+        </button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+      </form>
+    </div>
+  </div>
+</div>

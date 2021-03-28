@@ -1,4 +1,6 @@
-<div class="container">
+
+
+<form [formGroup]="payAddForm" class="container">
 
     <div class="checkout-panel">
         <div class="panel-body">
@@ -26,41 +28,52 @@
               </div>
             </label>
           </div>
+
+          <select (change)="cardSelectChangeHandler($event)" class="form-select" aria-label="Default select example">
+      <option selected>Kredi Kartları</option>
+      <option *ngFor="let cards of cards" value="{{cards.id}}">Cart Numarası : {{ cards.cardNumber }}</option>
+          </select>
        
           <div class="input-fields">
             <div class="column-1">
-              <label for="cardholder">Name</label>
-              <input type="text" id="cardholder" />
+              <label for="companyName">Name</label>
+              <input formControlName="companyName" [(ngModel)]="customer.companyName" type="text" id="companyName" />
        
               <div class="small-inputs">
                 <div>
-                  <label for="date">Valid date</label>
-                  <input type="text" id="date"/>
+                  <label for="expiration">Valid date</label>
+                  <input formControlName="expiration" [(ngModel)]="card.expiration" type="text" id="expiration"/>
                 </div>
        
                 <div>
-                  <label for="verification">CVV / CVC *</label>
-                  <input type="password" id="verification"/>
+                  <label for="cvc">CVV / CVC *</label>
+                  <input formControlName="cvc" [(ngModel)]="card.cvc" type="text" id="cvc"/>
                 </div>
               </div>
        
             </div>
             <div class="column-2">
-              <label for="cardnumber">Card Number</label>
-              <input type="password" id="cardnumber"/>
+              <label for="cardNumber">Card Number</label>
+              <input formControlName="cardNumber" [(ngModel)]="card.cardNumber" type="text" id="cardNumber"/>
        
-              <span class="info">* CVV or CVC is the card security code, unique three digits number on the back of your card separate from its number.</span>
+              <span class="info">* CVV veya CVC, kartınızın arkasındaki numarasından ayrı olarak benzersiz üç basamaklı bir kart güvenlik kodudur</span>
             </div>
           </div>
         </div>
+
+        <div class="form-check">
+          <input [(ngModel)]="isSaveCard" class="form-check-input" type="checkbox" id="flexCheckIndeterminate">
+          <label class="form-check-label" for="flexCheckIndeterminate">
+            Kart Bilgilerim Kaydedilmesin
+          </label>
+        </div>
        
-        <div class="panel-footer">
-          <button class="btn back-btn">Back</button>
-          <button class="btn next-btn">Next Step</button>
+        <div class="panel-footer text-center">
+          <button (click)="pay()" class="btn next-btn">Öde</button>
         </div>
       </div>
       
       
 
-</div>
+    </form>
 

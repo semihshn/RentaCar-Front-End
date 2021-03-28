@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Car } from 'src/app/models/car';
 import { CarDetail } from 'src/app/models/carDetail';
 import { CarImage } from 'src/app/models/carImage';
+import { AuthService } from 'src/app/services/auth.service';
 import { CarImageService } from 'src/app/services/car-image.service';
 import { CarService } from 'src/app/services/car.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-car',
@@ -24,7 +24,8 @@ export class CarComponent implements OnInit {
   constructor(
     private carService: CarService,
     private carImageService:CarImageService,
-    private activatedRout: ActivatedRoute
+    private activatedRout: ActivatedRoute,
+    private authService:AuthService
   ) {}
   
   ngOnInit(): void {

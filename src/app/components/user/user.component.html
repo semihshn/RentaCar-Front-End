@@ -1,0 +1,92 @@
+<div class="container">
+<div class="row justify-content-center">
+    <img class="h-25 w-25" src="https://img.flaticon.com/icons/png/512/38/38905.png?size=1200x630f&pad=10,10,10,10&ext=png&bg=FFFFFFFF">
+</div>
+<form class="row mt-5" [formGroup]="updateForm">
+        <div class="col-6">
+            <div class="mb-3">
+                <label for="firstName">İsim</label>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="firstName"
+                    formControlName="firstName"
+                    class="form-control"
+                    [(ngModel)]="userDetail.firstName"
+                  />
+                </div>
+              </div>
+      
+              <div class="mb-3">
+                <label for="lastName">Soyisim</label>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="lastName"
+                    formControlName="lastName"
+                    class="form-control"
+                    [(ngModel)]="userDetail.lastName"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="activePassword">Şuanki Şifre</label>
+                <div class="form-group">
+                  <input
+                    type="password"
+                    id="activePassword"
+                    formControlName="activePassword"
+                    class="form-control"
+                    [(ngModel)]="userDetail.activePassword"
+                  />
+                </div>
+              </div>
+
+        </div>
+
+        <div class="col-6">
+            <div class="mb-3">
+                <label for="email">E-posta</label>
+                <div class="form-group">
+                  <input
+                    type="email"
+                    id="email"
+                    formControlName="email"
+                    class="form-control"
+                    [(ngModel)]="userDetail.email"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="companyName">Firma Adı</label>
+                <div class="form-group">
+                  <input
+                    type="text"
+                    id="companyName"
+                    formControlName="companyName"
+                    class="form-control"
+                    [(ngModel)]="userDetail.companyName"
+                  />
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label for="newPassword">Yeni Şifre</label>
+                <div class="form-group">
+                  <input
+                    type="password"
+                    id="newPassword"
+                    formControlName="newPassword"
+                    class="form-control"
+                    [(ngModel)]="userDetail.newPassword"
+                  />
+                </div>
+              </div>
+        </div>
+
+
+    <div class="row">
+      <button class="btn btn-fill btn-primary" (click)="update()">
+        Güncelle
+      </button>
+    </div>

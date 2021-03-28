@@ -4,10 +4,8 @@
       <app-filter></app-filter>
     </div>
     <div class="col-md-9">
-      <h4 style="text-align: center;"><b>CAR LIST</b></h4>
 
-      <div class="mb-3">
-        <label for="filterText" class="form-label">Araba Ara</label>
+      <div class="mt-5">
         <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" 
         placeholder="arama ifadesi giriniz..">
       </div>
@@ -29,7 +27,7 @@
                 <li class="list-group-item">Brand: {{car.brandName}}</li>
                 <li class="list-group-item">Color: {{car.colorName}}</li>
                 <li class="list-group-item">Model Year: {{car.modelYear}}</li>
-                <li class="list-group-item">Daily Price: {{car.description}}</li>
+                <li class="list-group-item">Daily Price: {{car.dailyPrice}} ₺</li>
               </ul>
               <div class="card-body">
                   <section style="float:left">

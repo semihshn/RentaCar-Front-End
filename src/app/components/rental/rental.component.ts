@@ -22,8 +22,8 @@ import { RentalService } from 'src/app/services/rental.service';
 })
 export class RentalComponent implements OnInit {
   customers:Customer[]=[];
-  carDetail:CarDetail;
-  carImage:CarImage;
+  carDetail:CarDetail=Object.assign({});
+  carImage:CarImage=Object.assign({});
   
   customerId:number;
   returnDate!: Date;
@@ -66,8 +66,9 @@ export class RentalComponent implements OnInit {
     }
     this.rentalService.add(rentalInstance).subscribe((response)=>{
       this.toastrService.success("Araç kiralandı")
-      this.router.navigate(["pay"])
+      this.router.navigate(["pay",rentalInstance.customerId])
     },(responseError)=>{
+      console.log(responseError)
       let errorMessage = ErrorHelper.getMessage(responseError);
       this.toastrService.error(errorMessage, 'HATA');
     })
@@ -83,10 +84,10 @@ export class RentalComponent implements OnInit {
     this.customerId = parseInt(event.target.value);
   }
 
-  getImage(car:CarDetail){
-    this.carImageService.getImageByCarId(car.carId).subscribe((response)=>{
-        let images =response.data[0];
-        this.carImage=images
+  getImage(carId:number){
+    this.carImageService.getImageByCarId(carId).subscribe((response)=>{
+      let image =response.data[0];
+      this.carImage=image
     })
   }
 

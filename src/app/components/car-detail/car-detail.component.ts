@@ -33,8 +33,7 @@ export class CarDetailComponent implements OnInit {
   getCarDetail(carId:number) {
     this.carService.getCarByCar(carId).subscribe((response) => {
       this.carDetail = response.data;
-      console.log(this.carDetail.brandName)
-      
+      console.log(this.carDetail)
     });
   }
 

@@ -15,6 +15,8 @@ export class ErrorHelper {
       return errorMessages;
     } else if(error.error.message != null) {
       return error.error.message;
+    }else if(error.error.Message != null){
+      return error.error.Message
     }else{
       return error.error
     }

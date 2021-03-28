@@ -42,7 +42,7 @@ export class CarService {
   }
 
   getCarByCar(carId:number):Observable<SingleResponseModel<CarDetail>>{
-    let newPath=this.apiUrl+"Cars/getcarbycar?id="+carId
+    let newPath=this.apiUrl+"Cars/getcarbycarId?id="+carId
     return this.httpClient.get<SingleResponseModel<CarDetail>>(newPath);
   }
 

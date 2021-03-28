@@ -13,14 +13,18 @@ import { ColorInfoComponent } from './components/color-info/color-info.component
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { CreditCardComponent } from './components/credit-card/credit-card.component';
 import { CustomerComponent } from './components/customer/customer.component';
+import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { RegisterComponent } from './components/register/register.component';
 import { RentalComponent } from './components/rental/rental.component';
+import { UserComponent } from './components/user/user.component';
 import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
-  {path:"",pathMatch:"full",component:LoginComponent},
+  {path:"",pathMatch:"full",component:HomeComponent},
   {path:"login", component:LoginComponent},
+  {path:"register", component:RegisterComponent},
   {path:"cars",component:CarComponent,canActivate:[LoginGuard]},
   {path:"cars/brand/:brandId",component:CarComponent},
   {path:"cars/color/:colorId",component:CarComponent},
@@ -37,7 +41,8 @@ const routes: Routes = [
   {path:"admin/car-info", component:CarInfoComponent},
   {path:"admin/car-update/:carId", component:CarUpdateComponent},
   {path:"admin/car-add", component:CarAddComponent},
-  {path:"pay", component:PaymentComponent},
+  {path:"pay/:customerId", component:PaymentComponent},
+  {path:"user", component:UserComponent},
   
 
   

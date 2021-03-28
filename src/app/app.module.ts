@@ -31,6 +31,10 @@ import { BrandUpdateComponent } from './components/brand-update/brand-update.com
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { PaymentComponent } from './components/payment/payment.component';
+import { HomeComponent } from './components/home/home.component';
+import { RegisterComponent } from './components/register/register.component';
+import { CurrentUserComponent } from './components/navi/current-user/current-user.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,11 @@ import { PaymentComponent } from './components/payment/payment.component';
     BrandInfoComponent,
     BrandUpdateComponent,
     LoginComponent,
-    PaymentComponent
+    PaymentComponent,
+    HomeComponent,
+    RegisterComponent,
+    CurrentUserComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
