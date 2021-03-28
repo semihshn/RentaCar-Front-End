@@ -20,6 +20,14 @@
     <p align="center">
     In this project, we created a website for car rental using Asp.net Web API + Angular, in fact, we created a platform for the car rental industry, car rental companies will be able to register on our site and reach more customers, customers will be able to rent a car at a cheaper price.
     </p>
+</br>
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)](https://angular.io/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/docs/)
+
+
+
 
 ### Images
 
